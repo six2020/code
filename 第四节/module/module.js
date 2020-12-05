@@ -88,43 +88,65 @@
 // 6 --------------------------------------
 
 
-let n = 123;
+// let n = 123;
 
 
-function fn(){
-    console.log(666)
-}
+// function fn(){
+//     console.log(666)
+// }
 
-let obj = {
-    name: 'hello',
-    age: 18,
-    fn(){
-        console.log(888);
-        return 'ok'
-    }
-}
-
-
-exports.fn = fn;
-exports.num = n;
-exports.obj = obj;
+// let obj = {
+//     name: 'hello',
+//     age: 18,
+//     fn(){
+//         console.log(888);
+//         return 'ok'
+//     }
+// }
 
 
-// let arr = [];
+// exports.fn = fn;
+// exports.num = n;
+// exports.obj = obj;
 
-let func = function(){
-    console.log('555 ---->', 555);
+
+// // let arr = [];
+
+// let func = function(){
+//     console.log('555 ---->', 555);
     
-}
+// }
 
 
-// module.exports.arr = arr;
-module.exports.func = func;
+// // module.exports.arr = arr;
+// module.exports.func = func;
 
 
 
 
-module.exports = func;
+// module.exports = func;
 
 
-console.log('exports ---->', exports);
+// console.log('exports ---->', exports);
+
+
+// 7 --------------------------------------
+
+
+// let fn1 = ()=>{
+//     console.log(666)
+// }
+
+// let fn2 = ()=>{
+//     console.log(666)
+// }
+
+
+// module.exports = fn1;
+// module.exports = fn2;
+
+
+// 8 --------------------------------------
+// 
+
+// exports = module.exports = 666

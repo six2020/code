@@ -53,12 +53,45 @@
 
 // 6 --------------------------------------
 
-let obj = require('./module.js');
+// let obj = require('./module.js');
 
-console.log('obj ---->', obj);
+// console.log('obj ---->', obj);
 
 
-console.log('typeof obj; ---->', typeof obj);
+// console.log('typeof obj; ---->', typeof obj);
+
+
+// 7 --------------------------------------
+
+
+// let obj = require('./module.js');
+
+// console.log('obj ---->', obj);
+
+
+// 8 --------------------------------------
+
+// let obj = require('./module.js');
+
+// console.log('obj ---->', obj);
+
+
+
+// ======================================
+
+// let obj = require('../hello')
+
+
+
+// let obj = require('../require')
+
+
+
+const path = require('path');
+
+
+console.log('path ---->', path);
+
 
 
 
