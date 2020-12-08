@@ -13,6 +13,11 @@
 
 // 获取当前文件的文件名
 
+path.basename(__filename);
 
+console.log("basename:", path.basename(__dirname, __filename));
 
 // 获取当前文件的扩展名
+path.extname(__filename);
+
+path.extname(__filename)
