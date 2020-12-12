@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <h1>hello Nodejs</h1>
+
+    <form>
+        <div>
+            用户：<input type="text" id="name">
+        </div>
+        <div>
+            密码：<input type="password" id="pass">
+        </div>
+        <input type="button" value="注册" id="register">
+        <input type="button" value="登录" id="login">
+    </form>
+
+
+    <script src="./index.js"></script>
+    <script src="./jquery-3.5.1.js"></script>
+
+    <script>
+
+        // console.log('$ ====>>>>', $);
+
+        $('#register').on("click", function(){
+            $.ajax({
+                method: "POST",
+                url: 'http://localhost:8080/register',
+                data: {name: $('#name').val(), pass: $('#pass').val()},
+                dataType: 'json',
+                success(data){
+                    console.log('data ====>>>>', data);
+                    
+                },
+                error(err){
+                    console.log('err ====>>>>', err);
+                    
+                }
+            })
+        })
+
+        $('#login').on("click", function(){
+            $.ajax({
+                url: 'http://localhost:8080/login',
+                data: {name: $('#name').val(), pass: $('#pass').val()},
+                dataType: 'json',
+                success(data){
+                    if(data.code){
+                        console.log('data ====>>>>', data.msg);
+                    }else{
+                        console.log(data.msg);
+                    }
+                     
+                    
+                },
+                error(err){
+                    console.log('err ====>>>>', err);
+                    
+                }
+            })
+        })
+        
+
+    </script>
+</body>
+</html>
