@@ -5,7 +5,9 @@ const querystring = require('querystring');
 
 let staticServer = require('./staticserver');
 
-let user = {};
+let user = {
+    zhangsan: 45665
+};
 
 http.createServer(( req, res ) => {
 
