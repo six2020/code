@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <a href='http://localhost:8080/search'>返回</a>
+
+    {{each arr}}
+        <h2>{{$value.name}}</h2>
+         <ul>
+            {{each $value val key }}
+                <li>{{key | map key}} ---- {{val}}</li>
+            {{/each}}
+        </ul>
+    {{/each}}
+
+
+
+
+
+    // {{each arr}}
+    //      <ul>
+            
+    //             <li>{{$index}} ------  {{$value}}</li>
+            
+    //     </ul>
+    // {{/each}}
+    
+</body>
+</html>
