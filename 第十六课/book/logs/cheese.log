@@ -1,0 +1,9 @@
+[2021-01-05T21:24:36.971] [ERROR] cheese - ReferenceError: data is not defined
+    at C:\Users\china\Desktop\code\第十六课\book\controllers\indexController.js:11:17
+    at dispatch (C:\Users\china\Desktop\code\第十六课\book\node_modules\koa-simple-router\index.js:186:18)
+    at Router._lookup (C:\Users\china\Desktop\code\第十六课\book\node_modules\koa-simple-router\index.js:198:12)
+    at C:\Users\china\Desktop\code\第十六课\book\node_modules\koa-simple-router\index.js:138:21
+    at dispatch (C:\Users\china\Desktop\code\第十六课\book\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\china\Desktop\code\第十六课\book\node_modules\koa-static\index.js:53:15)
+    at async C:\Users\china\Desktop\code\第十六课\book\middlewares\index.js:17:13
+    at async C:\Users\china\Desktop\code\第十六课\book\middlewares\index.js:5:17
