@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>用户：<input type="text"  id="name"></div>
+    <div>密码：<input type="password"  id="pass"></div>
+    <input type="button" value="注册" id="btn1">
+    <input type="button" value="登录" id="btn2">
+
+    <script src="/jquery-3.5.1.js"></script>
+
+
+    <script>
+
+        $('#btn1').click(function(){
+            $.ajax({
+                url: '/reg',
+                method: "post",
+                dataType: "json",
+                data: {name: $('#name').val(), pass: $('#pass').val()},
+                success(msg){
+                    console.log('msg ====>>>>', msg);
+                    
+                },
+                error(err){
+                    console.log('err ====>>>>', err);
+                    
+                }
+            })
+        })
+
+        $('#btn2').click(function(){
+            $.ajax({
+                url: '/login',
+                method: "post",
+                dataType: "json",
+                data: {name: $('#name').val(), pass: $('#pass').val()},
+                success(msg){
+                    console.log('msg ====>>>>', msg);
+                    
+                },
+                error(err){
+                    console.log('err ====>>>>', err);
+                    
+                }
+            })
+        })
+
+    </script>
+</body>
+</html>
