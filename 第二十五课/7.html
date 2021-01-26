@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    
+
+    <button id="btn">提交</button>
+
+    <script>
+
+        // let formdata = new FormData();
+
+        // console.log('formdata ====>>>>', formdata);
+
+        // formdata.set('abc', '123');
+        // formdata.set('bbb', '222');
+        // formdata.set('bbb', '333');
+
+        // formdata.set('bbb', '222');
+        // formdata.append('bbb', '333');
+        // formdata.append('bbb', '444');
+
+
+
+
+
+        // console.log('formdata.get(abc) ====>>>>', formdata.get('abc'));
+        // console.log('formdata.get(bbb) ====>>>>', formdata.get('bbb'));
+        // console.log('formdata.getAll(bbb) ====>>>>', formdata.getAll('bbb'));
+        
+
+        btn.addEventListener('click', function (e) {
+
+            let formdata = new FormData();
+
+            formdata.set('aaa', '111')
+            formdata.set('bbb', '222')
+
+            let arr = [];
+            formdata.forEach((value, key)=>{
+                arr.push(`${key}=${value}`)
+            })
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('GET', `http://localhost:8080?${arr.join('&')}`, true);
+            // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+                        console.log('xhr ====>>>>', xhr.responseText);
+
+                    } else {
+                        console.log(' ====>>>>', '出错了');
+
+                    }
+                }
+            }
+
+            e.preventDefault()
+
+        }, false)
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

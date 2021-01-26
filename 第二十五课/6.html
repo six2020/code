@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="" id="form">
+
+        <div>
+            用户：<input type="text" name="user" id="inputUser">
+        </div>
+        <div>
+            密码：<input type="password" name="pass" id="inputPass">
+        </div>
+
+        <input type="submit" value="提交">
+    </form>
+
+
+    <script>
+
+        form.addEventListener('submit', function (e) {
+
+            let formdata = new FormData(this);
+
+            console.log('formdata.get(user) ====>>>>', formdata.get('pass'));
+            
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST', "http://localhost:8080", true);
+            // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+                        console.log('xhr ====>>>>', xhr.responseText);
+
+                    } else {
+                        console.log(' ====>>>>', '出错了');
+
+                    }
+                }
+            }
+
+            e.preventDefault()
+
+        }, false)
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
