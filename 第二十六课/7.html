@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .box{
+            width: 400px;
+            height: 200px;
+            border: 2px solid #000;
+            background-color: #eee;
+            line-height: 200px;
+            text-align: center;
+        }
+        .filelist img{
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        拖动上传文件
+    </div>
+
+    <div class="filelist">
+        <ul>
+            <!-- <li>
+                <img src="./img/1001.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/1001.jpg" alt="">
+            </li> -->
+        </ul>
+    </div>
+
+    <button id="btn">提交</button>
+
+    <pre></pre>
+
+    <script>
+
+        /** 
+         * 
+         *  读文件
+         * 
+         * 
+        */
+
+        let box = document.querySelector('.box');
+
+        // 拖拽进入目标元素
+        box.addEventListener('dragenter', ()=>{
+            box.innerText = '检测到文件，松手上传文件';
+        }, false)
+
+        // 拖拽 悬停在目标元素
+        box.addEventListener('dragover', (e)=>{
+            e.preventDefault()
+        }, false)
+
+        // 拖拽离开目标元素
+        box.addEventListener('dragleave', ()=>{
+            box.innerText = '拖动上传文件';
+        }, false)
+
+
+
+        // 在目标元素上松手
+        box.addEventListener('drop', (e)=>{
+            
+            // console.log('e.dataTransfer.files ====>>>>', e.dataTransfer.files);
+
+            let read = new FileReader();
+
+            read.onload = function(){
+                // console.log('read.result ====>>>>', read.result);
+
+                let pre = document.querySelector('pre');
+
+                pre.innerText = this.result;
+                
+            }
+
+            read.readAsText(e.dataTransfer.files[0])
+            
+
+            // let formdata = new FormData();
+            // Array.from(e.dataTransfer.files).forEach(item => {
+            //     formdata.append('_file', item);
+            // })
+
+            box.innerText = '拖动上传文件';
+            e.preventDefault()
+        }, false)
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <meter value="0" min="0" max="100" style="width: 500px;height: 40px;" id="meter"></meter>
+    
+    <input type="file" id="myfile" multiple>  <br>
+
+    <button id="btn">提交</button>
+
+    <script>
+
+        btn.onclick = function(){
+
+            let myfile = document.querySelector('#myfile');
+
+            let formdata = new FormData();
+
+            // console.log('myfile.files ====>>>>', myfile.files);
+
+            Array.from(myfile.files).forEach(item=>{
+                formdata.append('_file', item)
+            })
+            
+
+            // ========================
+            let xhr = new XMLHttpRequest();
+
+            xhr.upload.onprogress = function(e){
+                // console.log('e ====>>>>', e);
+
+                // e.loaded 当前上传的进度
+                // e.total 总进度 
+                // console.log(e.loaded, '----', e.total)
+
+                let meter = document.querySelector('#meter');
+
+                // e.loaded / e.total  ==>  0~1
+                meter.value = e.loaded / e.total * 100;
+                
+            }
+
+            xhr.open('POST', 'http://localhost:8080', true);
+
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                        console.log('xhr.responseText ====>>>>', xhr.responseText);
+                        
+                    }else{
+                        console.log(' ====>>>>', '出错了');
+                        
+                    }
+                }
+            }
+
+        }
+
+    </script>
+    
+</body>
+</html>

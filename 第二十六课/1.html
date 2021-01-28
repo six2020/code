@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <div>账户：<input type="text" name="user" id=""></div>
+        <div>密码：<input type="password" name="pass" id=""></div>
+
+    </form>
+
+    <button id="btn">提交</button>
+
+    <script>
+
+        btn.onclick = function(){
+
+            let form = document.querySelector('form');
+
+            let formdata = new FormData(form);
+
+            console.log('formdara.get(user) ====>>>>', formdata.get('user'));
+            
+
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST', 'http://localhost:8080?aa=11&bb=22', true);
+
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                        console.log('xhr.responseText ====>>>>', xhr.responseText);
+                        
+                    }else{
+                        console.log(' ====>>>>', '出错了');
+                        
+                    }
+                }
+            }
+
+        }
+
+    </script>
+    
+</body>
+</html>

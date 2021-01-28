@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .box{
+            width: 400px;
+            height: 200px;
+            border: 2px solid #000;
+            background-color: #eee;
+            line-height: 200px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        拖动上传文件
+    </div>
+
+    <script>
+
+        /** 
+         * 
+         *  拖拽 --》 上传多个文件
+         * 
+         * 
+        */
+
+        let box = document.querySelector('.box');
+
+        // 拖拽进入目标元素
+        box.addEventListener('dragenter', ()=>{
+            box.innerText = '检测到文件，松手上传文件';
+        }, false)
+
+        // 拖拽 悬停在目标元素
+        box.addEventListener('dragover', (e)=>{
+            e.preventDefault()
+        }, false)
+
+        // 拖拽离开目标元素
+        box.addEventListener('dragleave', ()=>{
+            box.innerText = '拖动上传文件';
+        }, false)
+
+
+
+        // 在目标元素上松手
+        box.addEventListener('drop', (e)=>{
+            
+            // console.log('e.dataTransfer.files ====>>>>', e.dataTransfer.files);
+
+            let formdata = new FormData();
+            // formdata.set('_file', e.dataTransfer.files[0]);
+
+            Array.from(e.dataTransfer.files).forEach(item => {
+                formdata.append('_file', item);
+            })
+
+            // ajax 上传
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST', 'http://localhost:8080', true);
+
+            xhr.send(formdata);
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                        console.log('xhr.responseText ====>>>>', xhr.responseText);
+                        
+                    }else{
+                        console.log(' ====>>>>', '出错了');
+                        
+                    }
+                }
+            }
+            
+
+            box.innerText = '拖动上传文件';
+            e.preventDefault()
+        }, false)
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
