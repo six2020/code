@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 200px;
+            border: 2px solid #000;
+            background-color: #eee;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .filelist img {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        拖动上传文件
+    </div>
+
+    <div class="filelist">
+        <ul>
+            <!-- <li>
+                <img src="./img/1001.jpg" alt="">
+                <a href="javascript:;">删除</a>
+            </li>
+            <li>
+                <img src="./img/1001.jpg" alt="">
+                <a href="javascript:;">删除</a>
+            </li> -->
+        </ul>
+    </div>
+
+    <button id="btn">提交</button>
+
+    <pre></pre>
+
+    <script>
+
+        /** 
+         * 
+         *  上传 -->  预览  -->  正式上传服务器
+         * 
+         * 
+        */
+
+        let box = document.querySelector('.box');
+
+        // 拖拽进入目标元素
+        box.addEventListener('dragenter', () => {
+            box.innerText = '检测到文件，松手上传文件';
+        }, false)
+
+        // 拖拽 悬停在目标元素
+        box.addEventListener('dragover', (e) => {
+            e.preventDefault()
+        }, false)
+
+        // 拖拽离开目标元素
+        box.addEventListener('dragleave', () => {
+            box.innerText = '拖动上传文件';
+        }, false)
+
+
+
+        // 在目标元素上松手
+        box.addEventListener('drop', (e) => {
+
+            // e.dataTransfer.files 类数组
+
+            Array.from(e.dataTransfer.files).forEach(item => {
+                // 读文件
+                let read = new FileReader();
+
+                read.onload = function () {
+                    // 生成 DOM 结构
+                    let li = document.createElement('li');
+                    li.file = item;
+                    li.innerHTML = `
+                        <img src="./img/1001.jpg" alt="">
+                        <a href="javascript:;">删除</a>
+                    `;
+
+                    li.children[0].src = this.result;
+
+                    li.children[1].onclick = function () {
+                        this.parentElement.remove();
+                    }
+
+                    let ul = document.querySelector('ul');
+                    ul.append(li)
+
+                }
+
+                // 读文件
+                read.readAsDataURL(item)
+            })
+
+            // 正式的上传
+            btn.onclick = function () {
+                
+                let li_data = document.querySelectorAll('li');
+
+                let formdata = new FormData();
+                Array.from(li_data).forEach(item => {
+                    formdata.append('_file', item.file);
+                });
+
+                // ajax 上传
+                let xhr = new XMLHttpRequest();
+
+                xhr.open('POST', 'http://localhost:8080', true);
+
+                xhr.send(formdata);
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState === 4){
+                        if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                            console.log('xhr.responseText ====>>>>', xhr.responseText);
+
+                        }else{
+                            console.log(' ====>>>>', '出错了');
+
+                        }
+                    }
+                }
+            }
+
+
+
+            // let formdata = new FormData();
+            // Array.from(e.dataTransfer.files).forEach(item => {
+            //     formdata.append('_file', item);
+            // })
+
+            box.innerText = '拖动上传文件';
+            e.preventDefault()
+        }, false)
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
